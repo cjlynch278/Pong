@@ -1,0 +1,131 @@
+import javax.swing.JPanel;
+
+
+/*
+ * PaddleMechs handles the mechanics of the paddles and all of the physics that need to 
+ * 		constantly be checked and run. 
+ *
+ */
+public class PaddleMechs implements Runnable {
+		BouncyBall ball;
+		Paddle paddle;
+		Paddle AIPaddle;
+		int paddleW;
+		int paddleH;
+		int diameter;
+		int panelH;
+		double difficulty;
+		int offset =-10;
+		int width;
+		PongGame pongGame;
+		BouncyBallFrame bouncyBallFrame;
+		
+		public PaddleMechs(PongGame pg, BouncyBall b, Paddle p, Paddle aip, int ph, int pw, int d,int h, 
+				double diff, int w, BouncyBallFrame bbf) {
+			
+			bouncyBallFrame = bbf;
+			pongGame = pg;
+			ball = b;
+			paddle = p;
+			AIPaddle = aip;
+			diameter = d;
+			panelH = h;
+			paddleH = ph;
+			paddleW= pw;
+			difficulty =diff;
+			width = w;
+		}
+		//The method makes the ball react to hitting one of the paddles
+		public double ballHit( double paddleW, double paddleX , double ballXCoord ){
+			double center = paddleX + paddleW/2;
+			double placement = ballXCoord - center;
+			double ballAngle= placement/10;
+			return ballAngle;
+			 
+		 }
+		
+		//trackBall handles how the AI paddle moves in relation to the ball
+		public void trackBall(){
+			
+			AIPaddle.setSpeed((double)(ball.getSpeedX()));
+			//This if statement caps the max speed of the AI paddle. This is what gives the game "Difficulty"
+			if(AIPaddle.getSpeed()> difficulty)
+				AIPaddle.setSpeed(difficulty);
+			else if (AIPaddle.getSpeed() < -difficulty)
+				AIPaddle.setSpeed(-difficulty);
+			
+			
+			//Stops the AI paddle when it is under the ball
+			if((ball.getX())>(AIPaddle.getX() - offset) && ball.getX()< (AIPaddle.getX()+paddleW + offset)){
+				AIPaddle.setSpeed(0);	
+			}
+			else if((ball.getX()<AIPaddle.getX() - offset) && ball.getSpeedX()>0){
+				AIPaddle.setSpeed(0);
+				}
+			else if((ball.getX() > AIPaddle.getX() + paddleW + offset) && ball.getSpeedX() <0){
+				AIPaddle.setSpeed(0);
+			}
+			else
+				AIPaddle.setX((AIPaddle.getX() + AIPaddle.getSpeed()));
+				
+				boundaries(AIPaddle);
+		}
+		
+		//Stops the paddle from traveling beyond the sides
+		public void boundaries(Paddle paddle){
+			if(paddle.getX()+paddleW>= width){
+				paddle.setX(width- paddleW);
+			}
+			if(paddle.getX() <= 0){
+				paddle.setX(0);
+			}
+		}
+		
+		//The run method that will simulate the ball being hit by the paddle. If the ball reaches one of the endzones,
+		// 		it will end the game.
+		@Override
+		public void run() {
+			
+		try {	
+			while(true){
+			
+				Thread.sleep(1);
+			
+				trackBall();
+
+				//AIPaddle
+				if(ball.getY()<= paddleH  && paddle.getX()<=ball.getX()&& ball.getX()<=(paddle.getX()+ paddle.getWidth())){
+				
+					ball.setSpeedX(ballHit(paddleW, paddle.getX(), ball.getX()));
+					ball.setSpeedY(-ball.getSpeedY());
+					Thread.sleep(25);
+				}
+				if(ball.getY()>=(panelH-paddleH-diameter)&& AIPaddle.getX()<=ball.getX()&& ball.getX()<=(AIPaddle.getX()+ AIPaddle.getWidth()) ){
+					ball.setSpeedX(ballHit(paddleW, AIPaddle.getX(), ball.getX()));
+					ball.setSpeedY(-ball.getSpeedY());
+					Thread.sleep(25);
+				
+				}
+				if(ball.getY()>= panelH-paddleH){
+					bouncyBallFrame.endGame('w',difficulty);
+					ball.stop();
+					pongGame.setVisible(false);
+					break;
+				
+				}
+				else if( ball.getY()<0){
+					bouncyBallFrame.endGame('l',difficulty);
+					ball.stop();
+					pongGame.setVisible(false);
+					break;
+				}
+			}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+			
+			 
+			
+}
