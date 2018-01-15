@@ -3,6 +3,10 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+
+/*
+ * The Paddle class draws the paddle and handles all of the values for each paddle
+ */
 public class Paddle implements Runnable {
 	private double x;
 	private int y;
@@ -45,7 +49,7 @@ public class Paddle implements Runnable {
 		return speed_x;
 	}
 	
-	//Implement the runnable method
+	//Implement the runnable method to repaint the paddle in different locations
 	@Override
 	public void run() {
 		try {
