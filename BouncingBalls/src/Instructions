@@ -1,0 +1,120 @@
+import javax.swing.JPanel;
+import java.awt.GridBagLayout;
+import javax.swing.JLabel;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JButton;
+import java.awt.Component;
+import javax.swing.Box;
+import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+
+
+/*
+ * The Instructions UI was built with the help of Window Builder. It displays the instructions for the game and 
+ * 		and creates the button to start the game.
+ */
+public class Instructions extends JPanel {
+	
+	
+	double difficulty;
+	BouncyBallFrame bouncyBallFrame;
+	
+	public Instructions(double d, BouncyBallFrame bbf) {
+		difficulty = d;
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{100, 0, 100, 0};
+		gridBagLayout.rowHeights = new int[]{50, 0, 0, 0, 200, 60, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
+		
+		Component rigidArea_1 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_1 = new GridBagConstraints();
+		gbc_rigidArea_1.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea_1.gridwidth = 3;
+		gbc_rigidArea_1.insets = new Insets(0, 0, 5, 0);
+		gbc_rigidArea_1.gridx = 0;
+		gbc_rigidArea_1.gridy = 0;
+		add(rigidArea_1, gbc_rigidArea_1);
+		
+		JLabel lblUseTheA = new JLabel("Use the A and D keys to move your paddle");
+		lblUseTheA.setFont(new Font("Arial", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblUseTheA = new GridBagConstraints();
+		gbc_lblUseTheA.insets = new Insets(0, 0, 5, 5);
+		gbc_lblUseTheA.gridx = 1;
+		gbc_lblUseTheA.gridy = 1;
+		add(lblUseTheA, gbc_lblUseTheA);
+		
+		Component rigidArea_2 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_2 = new GridBagConstraints();
+		gbc_rigidArea_2.gridheight = 5;
+		gbc_rigidArea_2.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea_2.insets = new Insets(0, 0, 5, 5);
+		gbc_rigidArea_2.gridx = 0;
+		gbc_rigidArea_2.gridy = 1;
+		add(rigidArea_2, gbc_rigidArea_2);
+		
+		Component rigidArea_4 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_4 = new GridBagConstraints();
+		gbc_rigidArea_4.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea_4.insets = new Insets(0, 0, 5, 5);
+		gbc_rigidArea_4.gridx = 1;
+		gbc_rigidArea_4.gridy = 2;
+		add(rigidArea_4, gbc_rigidArea_4);
+		
+		JLabel lblHitTheBall = new JLabel("Whoever misses the ball first loses");
+		lblHitTheBall.setFont(new Font("Arial", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblHitTheBall = new GridBagConstraints();
+		gbc_lblHitTheBall.insets = new Insets(0, 0, 5, 5);
+		gbc_lblHitTheBall.gridx = 1;
+		gbc_lblHitTheBall.gridy = 3;
+		add(lblHitTheBall, gbc_lblHitTheBall);
+		
+		Component rigidArea_5 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_5 = new GridBagConstraints();
+		gbc_rigidArea_5.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea_5.gridheight = 5;
+		gbc_rigidArea_5.insets = new Insets(0, 0, 5, 0);
+		gbc_rigidArea_5.gridx = 2;
+		gbc_rigidArea_5.gridy = 1;
+		add(rigidArea_5, gbc_rigidArea_5);
+		
+		Component rigidArea_3 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_3 = new GridBagConstraints();
+		gbc_rigidArea_3.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea_3.insets = new Insets(0, 0, 5, 5);
+		gbc_rigidArea_3.gridx = 1;
+		gbc_rigidArea_3.gridy = 4;
+		add(rigidArea_3, gbc_rigidArea_3);
+		
+		JButton btnPlay = new JButton("Play!");
+		btnPlay.setFont(new Font("Arial", Font.PLAIN, 18));
+		btnPlay.addActionListener(new ActionListener() {
+			//Starts the game when the Play button is pressed
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				bbf.startPong(difficulty);
+				
+			}
+		});
+		GridBagConstraints gbc_btnPlay = new GridBagConstraints();
+		gbc_btnPlay.fill = GridBagConstraints.BOTH;
+		gbc_btnPlay.insets = new Insets(0, 0, 5, 5);
+		gbc_btnPlay.gridx = 1;
+		gbc_btnPlay.gridy = 5;
+		add(btnPlay, gbc_btnPlay);
+		
+		Component rigidArea = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea = new GridBagConstraints();
+		gbc_rigidArea.gridwidth = 3;
+		gbc_rigidArea.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea.gridx = 0;
+		gbc_rigidArea.gridy = 6;
+		add(rigidArea, gbc_rigidArea);
+
+	}
+
+}
