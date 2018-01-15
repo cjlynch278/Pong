@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 
-//This class sets up the ball
+//BouncyBall creates the ball and holds all of it's values
 public class BouncyBall implements Runnable {
 	private double x;
 	private double y;
@@ -26,6 +26,7 @@ public class BouncyBall implements Runnable {
 	public void draw(Graphics g) {
 		g.setColor(Color.black);
 		g.fillOval((int) x, (int) y, diameter, diameter);
+		
 	}
 	
 	//Creates the bouncing off of the side walls
