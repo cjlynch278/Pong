@@ -1,0 +1,119 @@
+import javax.swing.JPanel;
+import java.awt.GridLayout;
+import javax.swing.SpringLayout;
+import java.awt.GridBagLayout;
+import javax.swing.JTextArea;
+
+import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Component;
+import javax.swing.Box;
+import java.awt.Dimension;
+import java.awt.Font;
+
+/*
+ * The UI for EndGamePanel was built with the help of Window Builder. This panel displays whether the play
+ * 		has won or lost and creates the replay button.
+ */
+public class EndGamePanel extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	BouncyBallFrame bbf;
+	
+	public EndGamePanel(double difficulty, char result, BouncyBallFrame bouncyBallsFrame) {
+	
+		bbf = bouncyBallsFrame;
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{200, 67, 200, 0};
+		gridBagLayout.rowHeights = new int[]{100, 62, 0, 100, 100, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
+		
+		//Display the game outcome
+		JLabel txtArea = new JLabel();
+		txtArea.setFont(new Font("Arial", Font.PLAIN, 38));
+		if(result == 'w') {
+			txtArea.setText(" You Win!");
+		}
+		else if (result == 'l') {
+			txtArea.setText(" You Lose");
+		}
+		else {
+			System.out.println("Error retrieving game result");
+		}
+		
+		Component rigidArea_2 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_2 = new GridBagConstraints();
+		gbc_rigidArea_2.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea_2.insets = new Insets(0, 0, 5, 5);
+		gbc_rigidArea_2.gridx = 1;
+		gbc_rigidArea_2.gridy = 0;
+		add(rigidArea_2, gbc_rigidArea_2);
+		GridBagConstraints gbc_txtArea = new GridBagConstraints();
+		gbc_txtArea.anchor = GridBagConstraints.NORTH;
+		gbc_txtArea.insets = new Insets(0, 0, 5, 5);
+		gbc_txtArea.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtArea.gridx = 1;
+		gbc_txtArea.gridy = 1;
+		add(txtArea, gbc_txtArea);
+		
+		//Create the replay button
+		JButton btnReplay = new JButton("Replay?");
+		btnReplay.setFont(new Font("Arial", Font.PLAIN, 38));
+		btnReplay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				bbf.startPong(difficulty);
+			}
+		});
+		
+		Component rigidArea = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea = new GridBagConstraints();
+		gbc_rigidArea.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea.gridheight = 5;
+		gbc_rigidArea.insets = new Insets(0, 0, 0, 5);
+		gbc_rigidArea.gridx = 0;
+		gbc_rigidArea.gridy = 0;
+		add(rigidArea, gbc_rigidArea);
+		
+		Component rigidArea_1 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_1 = new GridBagConstraints();
+		gbc_rigidArea_1.gridheight = 5;
+		gbc_rigidArea_1.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea_1.gridx = 2;
+		gbc_rigidArea_1.gridy = 0;
+		add(rigidArea_1, gbc_rigidArea_1);
+		
+		Component rigidArea_3 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_3 = new GridBagConstraints();
+		gbc_rigidArea_3.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea_3.insets = new Insets(0, 0, 5, 5);
+		gbc_rigidArea_3.gridx = 1;
+		gbc_rigidArea_3.gridy = 2;
+		add(rigidArea_3, gbc_rigidArea_3);
+		GridBagConstraints gbc_btnReplay = new GridBagConstraints();
+		gbc_btnReplay.fill = GridBagConstraints.BOTH;
+		gbc_btnReplay.insets = new Insets(0, 0, 5, 5);
+		gbc_btnReplay.gridx = 1;
+		gbc_btnReplay.gridy = 3;
+		add(btnReplay, gbc_btnReplay);
+		
+		Component rigidArea_4 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_4 = new GridBagConstraints();
+		gbc_rigidArea_4.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea_4.insets = new Insets(0, 0, 0, 5);
+		gbc_rigidArea_4.gridx = 1;
+		gbc_rigidArea_4.gridy = 4;
+		add(rigidArea_4, gbc_rigidArea_4);
+
+	}
+}
