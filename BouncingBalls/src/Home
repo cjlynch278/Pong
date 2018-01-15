@@ -1,0 +1,188 @@
+import javax.swing.JPanel;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import javax.swing.JButton;
+import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Component;
+import javax.swing.Box;
+import java.awt.Dimension;
+import java.awt.TextField;
+import java.awt.Font;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import javax.swing.UIManager;
+import javax.swing.JTextArea;
+import javax.swing.JLabel;
+
+
+/*
+ * Home's UI was built with the help of Window Builder. It displays the title of the the game and the difficulty buttons.
+ */
+public class Home extends JPanel {
+
+	
+	Instructions instructions;
+	public Home(BouncyBallFrame bbf) {
+		
+		
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{183, 183, 183, 0};
+		gridBagLayout.rowHeights = new int[]{40, 0, 40, 40, 10, 40, 40, 40, 40, 40, 100, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
+		
+		Component rigidArea_5 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_5 = new GridBagConstraints();
+		gbc_rigidArea_5.gridwidth = 2;
+		gbc_rigidArea_5.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea_5.insets = new Insets(0, 0, 5, 5);
+		gbc_rigidArea_5.gridx = 0;
+		gbc_rigidArea_5.gridy = 0;
+		add(rigidArea_5, gbc_rigidArea_5);
+		
+		JPanel panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.insets = new Insets(0, 0, 5, 0);
+		gbc_panel.anchor = GridBagConstraints.NORTHEAST;
+		gbc_panel.gridx = 2;
+		gbc_panel.gridy = 0;
+		add(panel, gbc_panel);
+		
+		JLabel txtrWelcomeToPong = new JLabel();
+		txtrWelcomeToPong.setBackground(UIManager.getColor("menu"));
+		txtrWelcomeToPong.setFont(new Font("Arial", Font.PLAIN, 21));
+		txtrWelcomeToPong.setText("  Welcome to Pong!");
+		GridBagConstraints gbc_txtrWelcomeToPong = new GridBagConstraints();
+		gbc_txtrWelcomeToPong.insets = new Insets(0, 0, 5, 5);
+		gbc_txtrWelcomeToPong.fill = GridBagConstraints.BOTH;
+		gbc_txtrWelcomeToPong.gridx = 1;
+		gbc_txtrWelcomeToPong.gridy = 1;
+		add(txtrWelcomeToPong, gbc_txtrWelcomeToPong);
+		
+		Component rigidArea_3 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_3 = new GridBagConstraints();
+		gbc_rigidArea_3.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea_3.insets = new Insets(0, 0, 5, 5);
+		gbc_rigidArea_3.gridx = 1;
+		gbc_rigidArea_3.gridy = 2;
+		add(rigidArea_3, gbc_rigidArea_3);
+		
+		Component rigidArea_4 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_4 = new GridBagConstraints();
+		gbc_rigidArea_4.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea_4.gridheight = 9;
+		gbc_rigidArea_4.insets = new Insets(0, 0, 5, 5);
+		gbc_rigidArea_4.gridx = 0;
+		gbc_rigidArea_4.gridy = 1;
+		add(rigidArea_4, gbc_rigidArea_4);
+		
+		Component rigidArea_1 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_1 = new GridBagConstraints();
+		gbc_rigidArea_1.insets = new Insets(0, 0, 5, 0);
+		gbc_rigidArea_1.gridheight = 9;
+		gbc_rigidArea_1.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea_1.gridx = 2;
+		gbc_rigidArea_1.gridy = 1;
+		add(rigidArea_1, gbc_rigidArea_1);
+		
+		//Each button will set the difficulty of the game and display the instructions panel.
+		JButton btnNewButton_2 = new JButton("Hard");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+				instructions = new Instructions(.6, bbf);
+				bbf.add(instructions,BorderLayout.CENTER);
+				instructions.setVisible(true);
+			}
+		});
+		
+		JButton btnNewButton_1 = new JButton("Medium");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+				instructions = new Instructions(.5,bbf);
+				bbf.add(instructions,BorderLayout.CENTER);
+				instructions.setVisible(true);
+			}
+		});
+		
+		
+		JLabel txtrChooseADifficulty = new JLabel();
+		txtrChooseADifficulty.setBackground(UIManager.getColor("menu"));
+		txtrChooseADifficulty.setFont(new Font("Arial", Font.PLAIN, 16));
+		txtrChooseADifficulty.setText("       Choose a Difficulty");
+		GridBagConstraints gbc_txtrChooseADifficulty = new GridBagConstraints();
+		gbc_txtrChooseADifficulty.insets = new Insets(0, 0, 5, 5);
+		gbc_txtrChooseADifficulty.fill = GridBagConstraints.BOTH;
+		gbc_txtrChooseADifficulty.gridx = 1;
+		gbc_txtrChooseADifficulty.gridy = 3;
+		add(txtrChooseADifficulty, gbc_txtrChooseADifficulty);
+		
+		Component rigidArea_6 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_6 = new GridBagConstraints();
+		gbc_rigidArea_6.fill = GridBagConstraints.HORIZONTAL;
+		gbc_rigidArea_6.insets = new Insets(0, 0, 5, 5);
+		gbc_rigidArea_6.gridx = 1;
+		gbc_rigidArea_6.gridy = 4;
+		add(rigidArea_6, gbc_rigidArea_6);
+		
+		JButton easy = new JButton("Easy");
+		easy.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				instructions = new Instructions(.3, bbf);
+				bbf.add(instructions,BorderLayout.CENTER);
+				instructions.setVisible(true);
+			}
+		});
+		
+		GridBagConstraints gbc_easy = new GridBagConstraints();
+		gbc_easy.fill = GridBagConstraints.BOTH;
+		gbc_easy.insets = new Insets(0, 0, 5, 5);
+		gbc_easy.gridx = 1;
+		gbc_easy.gridy = 5;
+		add(easy, gbc_easy);
+		
+		Component rigidArea = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea = new GridBagConstraints();
+		gbc_rigidArea.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea.insets = new Insets(0, 0, 5, 5);
+		gbc_rigidArea.gridx = 1;
+		gbc_rigidArea.gridy = 6;
+		add(rigidArea, gbc_rigidArea);
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.fill = GridBagConstraints.BOTH;
+		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_1.gridx = 1;
+		gbc_btnNewButton_1.gridy = 7;
+		add(btnNewButton_1, gbc_btnNewButton_1);
+		
+		Component rigidArea_2 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_2 = new GridBagConstraints();
+		gbc_rigidArea_2.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea_2.insets = new Insets(0, 0, 5, 5);
+		gbc_rigidArea_2.gridx = 1;
+		gbc_rigidArea_2.gridy = 8;
+		add(rigidArea_2, gbc_rigidArea_2);
+		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
+		gbc_btnNewButton_2.fill = GridBagConstraints.BOTH;
+		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_2.gridx = 1;
+		gbc_btnNewButton_2.gridy = 9;
+		add(btnNewButton_2, gbc_btnNewButton_2);
+		
+		Component rigidArea_7 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_7 = new GridBagConstraints();
+		gbc_rigidArea_7.fill = GridBagConstraints.BOTH;
+		gbc_rigidArea_7.gridwidth = 3;
+		gbc_rigidArea_7.insets = new Insets(0, 0, 0, 5);
+		gbc_rigidArea_7.gridx = 0;
+		gbc_rigidArea_7.gridy = 10;
+		add(rigidArea_7, gbc_rigidArea_7);
+
+	}
+
+}
